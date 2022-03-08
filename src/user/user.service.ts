@@ -42,20 +42,16 @@ class UserService {
   }
 
   async addUser(user: User): Promise<boolean> {
-    // object to be sent to AWS.
     const params = {
-      // TableName - the name of the table we are sending it to
       TableName: 'p2-users',
-      // Item - the object we are sending
+
       Item: user,
       ConditionExpression: '#username <> :username',
       ExpressionAttributeNames: {
         '#username': 'username',
-        //'#role': 'role'
       },
       ExpressionAttributeValues: {
         ':username': user.username,
-        //':role': user.role
       },
     };
 
@@ -124,7 +120,7 @@ class UserService {
         return false;
       });
   }
-} //end of UserService
+}
 
 const userService = new UserService();
 export default userService;

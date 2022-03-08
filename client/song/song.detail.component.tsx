@@ -11,43 +11,39 @@ import styles from '../global-styles';
 import { thunkGetSongs } from '../store/thunks';
 
 interface Props {
-    route: RouteProp<StackParams, 'SongDetail'>;
+  route: RouteProp<StackParams, 'SongDetail'>;
 }
 export default function SongDetailComponent(props: Props) {
-    const nav = useNavigation();
-    // Utilize redux to retrieve the value
-    // const songSelector = (state: SongState) => state.song;
-    // const song = useSelector(songSelector);
-    const userContext = useSelector((state: UserState) => state.user);
-    const dispatch = useDispatch();
+  const nav = useNavigation();
 
-    // retrieve the value from the navigator.
-    const song = props.route.params;
+  const userContext = useSelector((state: UserState) => state.user);
+  const dispatch = useDispatch();
 
-    function handleDelete() {
-        songService.deleteSong(song.song_id).then(() => {
-            dispatch(changeSong(new Song()));
-            dispatch(thunkGetSongs());
-            nav.navigate('Songs');
-        });
-    }
+  const song = props.route.params;
 
-    return (
-        <View style={styles.container}>
-         
-            <Text> {song.title}</Text>
-            <Text >{song.clicks}</Text>
-            
-            <View>
-                <Text>Song Item:</Text>
-                {song.clicks }
-                <Image source={{uri: song.img_url}} />
-            </View>
-            {userContext.role === 'employee' && (
-                <>
-                    <Button onPress={handleDelete} title='Delete Song' />
-                </>
-            )}
-        </View>
-    );
+  function handleDelete() {
+    songService.deleteSong(song.song_id).then(() => {
+      dispatch(changeSong(new Song()));
+      dispatch(thunkGetSongs());
+      nav.navigate('Songs');
+    });
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text> {song.title}</Text>
+      <Text>{song.clicks}</Text>
+
+      <View>
+        <Text>Song Item:</Text>
+        {song.clicks}
+        <Image source={{ uri: song.img_url }} />
+      </View>
+      {userContext.role === 'employee' && (
+        <>
+          <Button onPress={handleDelete} title="Delete Song" />
+        </>
+      )}
+    </View>
+  );
 }

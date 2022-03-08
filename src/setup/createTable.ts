@@ -2,10 +2,8 @@ import * as AWS from 'aws-sdk';
 import userService from '../user/user.service';
 import { User } from '../user/user';
 
-// Set the region
 AWS.config.update({ region: 'us-west-2' });
 
-// Create a DynamoDB service object
 const ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
 
 const removeUsers = {
@@ -50,10 +48,8 @@ ddb.deleteTable(removeUsers, function (err: any, data: any) {
   setTimeout(() => {
     ddb.createTable(userSchema, (err, data) => {
       if (err) {
-        // log the error
         console.log('Error', err);
       } else {
-        // celebrate, I guess
         console.log('Table Created', data);
         setTimeout(() => {
           populateUserTable();

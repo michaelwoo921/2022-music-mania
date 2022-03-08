@@ -1,5 +1,3 @@
-//modified from the boilerplate created by express-generator
-
 import createError from 'http-errors';
 import express from 'express';
 import logger from 'morgan';
@@ -11,7 +9,6 @@ import publicDir from './constant';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// router setup
 import indexRouter from './staticrouter/index';
 import usersRouter from './user/user.router';
 
@@ -32,7 +29,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(publicDir));
 
-// using express-session
 app.use(
   session({
     secret: 'whatever',
@@ -44,16 +40,11 @@ app.use(
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
 
-// catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// error handler
 app.use(function (err: any, req: any, res: any, next: Function) {
-  // set locals, only providing error in development
-
-  // send error file
   res.status(err.status || 500);
   res.sendFile('error.html', { root: publicDir });
 });

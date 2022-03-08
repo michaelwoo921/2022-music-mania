@@ -6,10 +6,8 @@ class UserService {
   constructor() {
     // URL of the express server
     this.URI = 'http://localhost:5000/api/users';
-    // this.URI = 'http://34.216.137.225:3000/users'
   }
   getLogin(): Promise<User> {
-    // withCredentials sends our cookies with the request.
     return axios
       .get(this.URI, { withCredentials: true })
       .then((result: any) => {
@@ -54,7 +52,6 @@ class UserService {
       });
   }
 
-  //Look here to add user
   addUser(user: User): Promise<null> {
     return axios
       .post(this.URI + '/register', user, { withCredentials: true })

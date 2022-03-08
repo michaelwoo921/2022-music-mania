@@ -52,9 +52,6 @@ To-do list:
 To use the app first register and log in:
 ![Login or Register](/Screenshots/login.png 'Login or Register')
 
-You will be taken to the Home Screen:
-![Home Screen](/Screenshots/home-screen.png 'Home Screen')
-
 Any user can play songs:
 ![Playing Song](/Screenshots/playing.png 'Playing Song')
 
